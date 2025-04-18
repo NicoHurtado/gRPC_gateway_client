@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+*.pb2.py
+*.pb2_grpc.py
