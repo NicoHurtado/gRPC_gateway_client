@@ -1,45 +1,90 @@
-# gRPC-Calculator
 
-**gRPC-Calculator** es una implementacion academica para el entendimiento de la arquitectura basada en microservicios. Es una calculadora distribuida utilizando gRPC y RabbitMQ. Cada operación aritmética básica (suma, resta, multiplicación y división) se maneja mediante un microservicio independiente, lo que permite escalabilidad y mantenimiento modular.
+# 📈 Distributed gRPC
 
-## Tabla de Contenidos
+**Distributed gRPC** muestra los principios de **microservicios**, **gRPC** y **RabbitMQ**. Implementa una calculadora distribuida donde cada operación matemática básica — suma, resta, multiplicacion y division se gestiona en un microservicio separado, garantizando modularidad, escalabilidad y facilidad de mantenimiento.
 
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Requisitos Previos](#requisitos-previos)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Notas Adicionales](#notas-adicionales)
-- [Licencia](#licencia)
+---
 
-## Estructura del Proyecto
+## 🧩 Descripción General
 
-El proyecto está organizado en los siguientes directorios y archivos principales:
+Esta aplicación integra:
 
-- **client_rest/**: Cliente REST construido con FastAPI que interactúa con el gateway para realizar operaciones aritméticas.
-- **gateway/**: Puerta de enlace que recibe solicitudes del cliente REST y las dirige a los microservicios correspondientes a través de RabbitMQ.
-- **sum_service/**: Microservicio que maneja operaciones de suma.
-- **sub_service/**: Microservicio que maneja operaciones de resta.
-- **mul_service/**: Microservicio que maneja operaciones de multiplicación.
-- **div_service/**: Microservicio que maneja operaciones de división.
-- **rabbitmq/**: Configuración y consumidor de RabbitMQ para manejar la cola de mensajes entre el gateway y los microservicios.
-- **docker-compose.yml**: Archivo de configuración para Docker Compose que orquesta todos los servicios del proyecto.
+- **FastAPI** como cliente REST.
+- **RabbitMQ** como sistema de mensajería para encolar solicitudes.
+- **gRPC** para la comunicación eficiente entre servicios.
+- **Docker Compose** para el despliegue coordinado de todos los componentes.
 
-## Requisitos Previos
+Cada operación aritmética se delega a un microservicio independiente, reflejando una arquitectura desacoplada y extensible.
 
-Antes de instalar y ejecutar el proyecto, asegúrate de tener instalados los siguientes componentes:
+---
 
-- **Docker**: Para crear y gestionar contenedores.
-- **Docker Compose**: Para orquestar múltiples contenedores.
+## 🏗️ Estructura del Proyecto
 
-Además, si estás utilizando **Windows**, es necesario:
+- **client_rest/**  
+  Cliente REST desarrollado en FastAPI. Envía peticiones de operaciones matemáticas.
 
-- **WSL2 (Windows Subsystem for Linux 2)**: Para ejecutar entornos Linux en Windows y permitir la integración con Docker.
+- **gateway/**  
+  Componente intermediario que recibe solicitudes REST, las convierte en mensajes y las enruta hacia los microservicios apropiados mediante RabbitMQ.
 
-## Instalación
+- **sum_service/**  
+  Operaciones de suma.
 
-Sigue estos pasos para instalar y ejecutar el proyecto:
+- **sub_service/**  
+  Operaciones de resta.
 
-1. **Clona el repositorio**:
+- **mul_service/**  
+  Operaciones de multiplicación.
+
+- **div_service/**  
+  Operaciones de división.
+
+- **rabbitmq/**  
+  Configuración y consumidor de colas
+
+- **docker-compose.yml**  
+  Archivo para levantar todos los servicios.
+
+---
+
+## ⚙️ Requisitos Previos
+
+Antes de comenzar, asegúrate de tener instalados:
+
+- **Docker** (v20 o superior recomendado)
+- **Docker Compose** (v2.0+)
+
+---
+
+## 🛠️ Instrucciones de Instalación
+
+1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/joseduquep/gRPC-Calculator.git
+   git clone https://github.com/NicoHurtado/gRPC_gateway_client.git
+   cd gRPC_gateway_client
+   ```
+
+2. Levanta los servicios:
+
+   ```bash
+   docker-compose up --build
+   ```
+
+Esto construirá y desplegará automáticamente todos los contenedores necesarios.
+
+---
+
+## 🚀 Cómo Ejecutarlo
+
+1. Una vez desplegados los contenedores, puedes interactuar con el cliente REST
+
+2. Endpoints principales:
+
+   - `POST /sum` — Suma
+   - `POST /sub` — Resta
+   - `POST /mul` — Multiplicación
+   - `POST /div` — División
+
+   Cada solicitud debe incluir un cuerpo JSON con los números a, b (float) correspondientes.
+
+---
