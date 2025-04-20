@@ -1,6 +1,8 @@
 import grpc
 from concurrent import futures
 import time
+import os
+os.environ["PYTHONUNBUFFERED"] = "1"
 
 import div_pb2
 import div_pb2_grpc
